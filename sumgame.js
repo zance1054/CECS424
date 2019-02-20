@@ -20,7 +20,7 @@ function depthFirst(results, number, current, op, position, curValue, prevVal, s
 {
   if( pos == number.size() && curValue == sum)
   {
-    reuslts.push(current)
+    results.push(current)
   }
 
   else {
@@ -31,16 +31,39 @@ function depthFirst(results, number, current, op, position, curValue, prevVal, s
 
       now = Number(t);
 
-      if(String(now).size() == t.size())
-      {
-        depthFirst(results, number, current+'+'+t, '+', i, cumulativeVal+now, now,  sum);
-        depthFirst(results, number, current+'-'+t, '-', i, cumulativeVal-now, now,  sum);
-      }
+      depthFirst(results, number, current+'+'+t, '+', i, cumulativeVal+now, now,  sum);
+      depthFirst(results, number, current+'-'+t, '-', i, cumulativeVal-now, now,  sum);
+
     }
   }
 }
 
+function addOperators(numbers, sum)
+{
+  var results = new Array();
 
+  if(numbers.length == 0)
+  {
+    return results;
+  }
+
+  for(i = 0; i <= numbers.length; i++)
+  {
+      var str = numbers.substring(0,i);
+      current = Number(str);
+
+      depthFirst(results, numbers, str, '', i, current, current, sum);
+  }
+
+  for(i = 0; i <= numbers.length; i++)
+  {
+      var str = numbers.substring(0,i);
+      current = Number(str);
+
+      str = str + "0,1,-";
+      depthFirst(results, numbers, str, '', i, current, current, sum);
+  }
+}
 //retrieve command line arguements
 var nums = process.argv[2];
 var targetSum = process.argv[3];
