@@ -1,15 +1,22 @@
+/*
+	Alexander Fielding
+	Kim-Wilson Ngo
+	Tajbir Sandhu
+	CECS 424 Assignment 5
+*/
+
 import java.util.ArrayList;
 import java.util.List;
 
 public class Assn5 {
-	
+
 	public static void main(String[] args)
 	{
 		System.out.println("test");
-		
+
 		String number = args[0];
 		int sum = Integer.parseInt(args[1]);
-	
+
 		List<String> l = operatorSum(number, sum);
 		System.out.println("# of matches: " + l.size());
 		for(int i = 0; i < l.size(); i++)
@@ -17,7 +24,7 @@ public class Assn5 {
 			System.out.println((i+1) + ": " + l.get(i) + "= " + sum);
 		}
 	}
-	
+
 	/**
 	 * Kicks off the operations on the given number
 	 * @param number
@@ -27,22 +34,22 @@ public class Assn5 {
 	public static List<String> operatorSum(String number, int sum)
 	{
 		List<String> result = new ArrayList<String>();
-		
+
 		for(int i = 1; i < number.length() + 1; i++)
 		{
 			if(i == 1 || (Character.toString(number.charAt(0)) != "0" && i > 1))
 			{
-				
+
 				int numInt = Integer.parseInt(number.substring(0, i));
 				String numString = number.substring(i);
 				String numString2 = number.substring(0,i);
 				sumHelper(numString, numString2, numInt, numInt, result, sum);
 			}
 		}
-		
+
 		return result;
 	}
-	
+
 	/**
 	 * Helper function that adds to the list of expression once number is fully processed
 	 * @param number
@@ -59,11 +66,11 @@ public class Assn5 {
 			if(current == sum)
 			{
 				result.add(subNum);
-			
+
 			}
 			return;
 		}
-		
+
 		//Processes numbers subparts at a time an adds in the operation
 		for(int i = 1; i < number.length() + 1; i++)
 		{
