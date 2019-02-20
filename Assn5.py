@@ -6,7 +6,7 @@ Created on Tue Feb 19 02:40:03 2019
 """
 import sys
 
-
+#Kicks off the operations on the given number
 def operatorSum(number, sum):
     result = []
     for i in range(1, len(number) + 1):
@@ -16,12 +16,13 @@ def operatorSum(number, sum):
             sumHelper(number[i:], number[:i], numInt, numInt, result, sum) 
     return result
 
+#Helper function that adds to the list of expressions once number is fully processed
 def sumHelper(number, subNum, current, last, result, sum):
     if not number:
         if current == sum:
             result.append(subNum)
         return
-    
+    #Processes numbers subparts at a time an adds in the operation
     for i in range(1, len(number) + 1):
         numInt = number[:i]
         if i == 1 or (i > 1 and number[0] != "0"): # prevent "00*" as a numberber
