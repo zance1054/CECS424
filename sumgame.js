@@ -7,6 +7,40 @@
 
 // should get 22 results
 
+/*
+  param = "results" : Array that stores correct results
+  param = "number"  : String of numbers passed as initial arguements
+  param = "current" : The current number in the string
+  param = "op" : operator; + or -
+  param = "curValue" : the current sum curValue
+  param = "prevVal" : the previous value for curValue
+  param = "sum" : initial final value passed by user
+*/
+function depthFirst(results, number, current, op, position, curValue, prevVal, sum)
+{
+  if( pos == number.size() && curValue == sum)
+  {
+    reuslts.push(current)
+  }
+
+  else {
+
+    for(i=pos+1; i <= number.length;i++)
+    {
+      var tmp = number.substring(pos,i-pos);
+
+      now = Number(t);
+
+      if(String(now).size() == t.size())
+      {
+        depthFirst(results, number, current+'+'+t, '+', i, cumulativeVal+now, now,  sum);
+        depthFirst(results, number, current+'-'+t, '-', i, cumulativeVal-now, now,  sum);
+      }
+    }
+  }
+}
+
+
 //retrieve command line arguements
 var nums = process.argv[2];
 var targetSum = process.argv[3];
@@ -17,6 +51,7 @@ var results = new Array();
 console.log('nums: ' + nums);
 console.log('targetSum: ' + targetSum);
 
+/*
 //shoould be the amount of nums^2 combinatons
 for(i = 0; i < nums.length; i++)
 {
@@ -47,7 +82,7 @@ for(i = 0; i < nums.length; i++)
       }
     }
 }
-
+*/
 for(i = 0; i < results.length; i++)
 {
   console.log(i + ": " + results[i])
