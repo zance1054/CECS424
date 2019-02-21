@@ -5,8 +5,6 @@
   between digits in ‘number’
 */
 
-// should get 22 results
-
 /*
   param = "results" : Array that stores correct results
   param = "number"  : String of numbers passed as initial arguements
@@ -43,9 +41,8 @@ function depthFirst(results, number, current, op, position, curValue, prevVal, s
   param = "numbers" : user input of numbers to run
   param = "sum" : user input of target sum to search for
 */
-function addOperators(numbers, sum)
+function addOperators(numbers, sum,results)
 {
-  var results = new Array();
 
   if(numbers.length == 0)
   {
@@ -66,17 +63,21 @@ function addOperators(numbers, sum)
       current = Number(str);
 
       str = str + "0,1,-";
+
       depthFirst(results, numbers, str, '', i, current, current, sum);
   }
 
   return results;
 }
+
+
 //retrieve command line arguements
 var nums = process.argv[2];
 var targetSum = process.argv[3];
 
 //where we will store any results
-var results = addOperators(nums,targetSum);
+var results = [];
+var results = addOperators(nums,targetSum,results);
 
 console.log('nums: ' + nums);
 console.log('targetSum: ' + targetSum);
@@ -87,38 +88,3 @@ for(i = 0; i < results.length; i++)
   console.log('here')
   console.log(i + ": " + results[i])
 }
-
-/*
-//shoould be the amount of nums^2 combinatons
-for(i = 0; i < nums.length; i++)
-{
-    var firstnum = nums[i];
-
-    console.log(firstnum);
-    var curResult = ""
-    for(j = i + 1; j < nums.length; j++)
-    {
-      var curResult = ""
-
-      if(Number(firstnum) + Number(nums[j]) == 0)
-      {
-        curResult = firstnum + "' + '" +  nums[j]
-        results.push(curResult)
-      }
-
-      if(Number(firstnum) - Number(nums[j]) == 0)
-      {
-        curResult = firstnum + "' - '" + nums[j]
-        results.push(curResult)
-      }
-
-      if(Number(nums[j] - Number(firstnum)) == 0)
-      {
-        curResult = nums[j] + "' - '" + firstnum
-        results.push(nums[j] + "' - '" + firstnum)
-      }
-    }
-}
-*/
-
-//process.stdout.write("Enter the numbers to check for zero sum seperated by white space")

@@ -16,7 +16,8 @@ public class Assn5 {
 
 		String number = args[0];
 		int sum = Integer.parseInt(args[1]);
-
+		//String number = "123456789";
+		//int sum = 0;
 		List<String> l = operatorSum(number, sum);
 		System.out.println("# of matches: " + l.size());
 		for(int i = 0; i < l.size(); i++)
@@ -46,6 +47,23 @@ public class Assn5 {
 				sumHelper(numString, numString2, numInt, numInt, result, sum);
 			}
 		}
+		
+		int temp = Integer.parseInt(number) * -1;
+		number = temp + "";
+		
+		for(int i = 2; i < number.length() + 1; i++)
+		{
+			
+			int numInt = Integer.parseInt(number.substring(0,i));
+			if(i == 1 || (Character.toString(number.charAt(0)) != "0" && i > 1))
+			{
+				numInt = Integer.parseInt(number.substring(0,i));
+				String numString = number.substring(i);
+				String numString2 = number.substring(0,i);
+				sumHelper(("-" + numString), numString2, numInt, numInt, result, sum);
+			}
+		}
+		
 
 		return result;
 	}
@@ -76,11 +94,11 @@ public class Assn5 {
 		{
 			String numInt = number.substring(0, i);
 			String numInt2 = number.substring(i);
-			if(i == 1 || (i > 1 && Character.toString(number.charAt(0)) != "0"))
+			if(!numInt.equals("-") && i == 1 || (!numInt.equals("-") && i > 1 && Character.toString(number.charAt(0)) != "0"))
 			{
 				sumHelper(numInt2, subNum + "+" + numInt, (current + Integer.parseInt(numInt)), Integer.parseInt(numInt), result, sum);
-				sumHelper(numInt2, subNum + "-" + numInt, (current - Integer.parseInt(numInt)), -(Integer.parseInt(numInt)), result, sum);
-
+				sumHelper(numInt2, subNum + "-" + numInt, (current - Integer.parseInt(numInt)), (-1*(Integer.parseInt(numInt))), result, sum);
+				
 			}
 		}
 	}
