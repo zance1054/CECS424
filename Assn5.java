@@ -14,10 +14,10 @@ public class Assn5 {
 	{
 		System.out.println("test");
 
-		//String number = args[0];
-		//int sum = Integer.parseInt(args[1]);
-		String number = "123456789";
-		int sum = 0;
+		String number = args[0];
+		int sum = Integer.parseInt(args[1]);
+		//String number = "123456789";
+		//int sum = 0;
 		List<String> l = operatorSum(number, sum);
 		System.out.println("# of matches: " + l.size());
 		for(int i = 0; i < l.size(); i++)
