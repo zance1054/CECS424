@@ -22,7 +22,10 @@ public class Assn5 {
 		System.out.println("# of matches: " + l.size());
 		for(int i = 0; i < l.size(); i++)
 		{
-			System.out.println((i+1) + ": " + l.get(i) + "= " + sum);
+			//Rids of double operators
+			l.set(i, l.get(i).replace("--", "+"));
+			l.set(i, l.get(i).replace("+-", "-"));
+			System.out.println((i+1) + ": " + l.get(i) + " = " + sum);
 		}
 	}
 
@@ -44,7 +47,7 @@ public class Assn5 {
 				int numInt = Integer.parseInt(number.substring(0, i));
 				String numString = number.substring(i);
 				String numString2 = number.substring(0,i);
-				sumHelper(numString, numString2, numInt, numInt, result, sum);
+				sumHelper(numString, numString2, numInt, result, sum);
 			}
 		}
 		
@@ -60,7 +63,7 @@ public class Assn5 {
 				numInt = Integer.parseInt(number.substring(0,i));
 				String numString = number.substring(i);
 				String numString2 = number.substring(0,i);
-				sumHelper(("-" + numString), numString2, numInt, numInt, result, sum);
+				sumHelper(("-" + numString), numString2, numInt, result, sum);
 			}
 		}
 		
@@ -77,7 +80,7 @@ public class Assn5 {
 	 * @param result
 	 * @param sum
 	 */
-	public static void sumHelper(String number, String subNum, int current, int last, List<String> result, int sum)
+	public static void sumHelper(String number, String subNum, int current, List<String> result, int sum)
 	{
 		if(number.equals(""))
 		{
@@ -96,8 +99,8 @@ public class Assn5 {
 			String numInt2 = number.substring(i);
 			if(!numInt.equals("-") && i == 1 || (!numInt.equals("-") && i > 1 && Character.toString(number.charAt(0)) != "0"))
 			{
-				sumHelper(numInt2, subNum + "+" + numInt, (current + Integer.parseInt(numInt)), Integer.parseInt(numInt), result, sum);
-				sumHelper(numInt2, subNum + "-" + numInt, (current - Integer.parseInt(numInt)), (-1*(Integer.parseInt(numInt))), result, sum);
+				sumHelper(numInt2, subNum + "+" + numInt, (current + Integer.parseInt(numInt)), result, sum);
+				sumHelper(numInt2, subNum + "-" + numInt, (current - Integer.parseInt(numInt)), result, sum);
 				
 			}
 		}
