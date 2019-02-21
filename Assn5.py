@@ -14,7 +14,7 @@ def operatorSum(number, sum):
         #keeps us from getting double zeroes as a numIntue
         if i == 1 or (number[0] != "0" and i > 1): 
             numInt = int(number[:i])
-            sumHelper(number[i:], number[:i], numInt, numInt, result, sum) 
+            sumHelper(number[i:], number[:i], numInt, result, sum) 
     
     #accounts for negative numbers
     number = int(number) * -1
@@ -23,12 +23,12 @@ def operatorSum(number, sum):
         #keeps us from getting double zeroes as a numIntue
         if numInt != '-' and i == 1 or (number[0] != "0" and i > 1 and numInt != '-'): 
             numInt = int(number[:i])
-            sumHelper("-" + number[i:], number[:i], numInt, numInt, result, sum) 
+            sumHelper("-" + number[i:], number[:i], numInt, result, sum) 
             
     return result
 
 #Helper function that adds to the list of expressions once number is fully processed
-def sumHelper(number, subNum, current, last, result, sum):
+def sumHelper(number, subNum, current, result, sum):
     if not number:
         if current == sum:
             result.append(subNum)
@@ -37,17 +37,17 @@ def sumHelper(number, subNum, current, last, result, sum):
     for i in range(1, len(number) + 1):
         numInt = number[:i]
         if numInt != '-' and i == 1 or (i > 1 and number[0] != "0" and numInt != '-'): # prevent "00*" as a numberber
-            sumHelper(number[i:], subNum + "+" + numInt, current + int(numInt), int(numInt), result, sum)
-            sumHelper(number[i:], subNum + "-" + numInt, current - int(numInt), -int(numInt), result, sum)
-            #sumHelper((number[i:]), '-' + subNum + "+" + numInt, current + int(numInt), int(numInt), result, sum)
-            #sumHelper((number[i:]), '-' + subNum + "-" + numInt, current - int(numInt), -int(numInt), result, sum)
-
+            sumHelper(number[i:], subNum + "+" + numInt, current + int(numInt), result, sum)
+            sumHelper(number[i:], subNum + "-" + numInt, current - int(numInt), result, sum)
+           
 def main(number, sum):
     l = operatorSum(number, sum)
 
 
     print("# of matches: ", len(l))
     for i in range(len(l)):
+        l[i] = l[i].replace("--", "+")
+        l[i] = l[i].replace("+-", "-")
         print(i+1, ":", l[i], "=", sum)
 
 
@@ -58,3 +58,4 @@ if __name__ == '__main__':
 
     
 #main("123456789", 0)
+
