@@ -26,7 +26,7 @@ using namespace std;
     This function is a depth first search to find all possible combinations of the
     user defined string and '+' '-' operators which result in the desired sum
 */
-void depthFirstSearch(vector<string>& results, string& number, string current, char op, int pos, int cumulativeVal, int prevVal,  int sum)
+void depthFirstSearch(vector<string>& results, string& number, string current, int pos, int cumulativeVal,  int sum)
 {
     // if the current position is at the end of the user defined number
     // and the cumulative sum is less the same as the desired sum, then
@@ -45,9 +45,9 @@ void depthFirstSearch(vector<string>& results, string& number, string current, c
             string temp = number.substr(pos, i-pos); // stores a number string from the remaining numbers based on the current position
             int pastVal = stoi(temp); // convert the number string to an integer
             // branches off to a '+' operator
-            depthFirstSearch(results, number, current + '+' + temp, '+', i, cumulativeVal+pastVal, pastVal,  sum);
+            depthFirstSearch(results, number, current + '+' + temp, i, cumulativeVal+pastVal,  sum);
             // branches off to a '-' operator
-            depthFirstSearch(results, number, current + '-' + temp, '-', i, cumulativeVal-pastVal, pastVal,  sum);
+            depthFirstSearch(results, number, current + '-' + temp, i, cumulativeVal-pastVal,  sum);
         }
     }
 }
@@ -68,7 +68,7 @@ vector<string> addOperators(string number, int sum)
     {
         string str = number.substr(0, i); // creates a string based on the current location
         int current = stoi(str); // converts the number string to an int
-        depthFirstSearch(results, number, str, ' ', i, current, current,  sum);
+        depthFirstSearch(results, number, str, i, current, sum);
     }
     // loop which calls the dfs and branches off to all possible combinations where 1 is negative
     for (int i = 1; i <= number.size(); i++)
@@ -76,7 +76,7 @@ vector<string> addOperators(string number, int sum)
         string str = number.substr(0, i); // creates a string based on the current location
         str.insert(0,1,'-'); // ensures that the number string is negative
         int current = stoi(str); // converts the number string to an int
-        depthFirstSearch(results, number, str, ' ', i, current, current,  sum);
+        depthFirstSearch(results, number, str,  i, current, sum);
     }
 
     return results; // returns all possible combinations that result in the desired sum
