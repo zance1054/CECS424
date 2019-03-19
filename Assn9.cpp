@@ -34,14 +34,16 @@ void matrixMult(int **matrix1, int **matrix2, int a, int b, int c, int d)
 	{
 		for (int j = 0; j < d; j++)
 		{
+			*(*(resultMat + i) + j) = 0;
 			for (int z = 0; z < b; z++)
 			{
+			
 				*(*(resultMat + i) + j) += *(*(matrix1 + i) + z) * *(*(matrix2 + z) + j);
-				
 			}
+		
 		}
 	}
-	
+	cout << "\n\n";
 	//Prints Matrix
 	for (int i = 0; i < a; i++)
 	{
@@ -55,7 +57,8 @@ void matrixMult(int **matrix1, int **matrix2, int a, int b, int c, int d)
 
 int main(int argc, char** argv)
 {
-	//int a = 2, b = 2, c = 2, d = 2;
+	
+	//int a = 3, b = 2, c = 2, d = 3;
 	int a = atoi(argv[1]), b = atoi(argv[2]), c = atoi(argv[3]), d = atoi(argv[4]);
 	int temp = 0;
 
